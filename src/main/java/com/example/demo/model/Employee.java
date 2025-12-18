@@ -75,13 +75,13 @@ public class Employee {
     public void setSkills(String skills) {
         this.skills = skills;
     }
-  @Transient
-    public String[] getSkillArray() {
-    if (skills == null || skills.isBlank()) {
-        return new String[0];
+@Transient
+public List<String> getSkillList() {
+    if (skills==null||skills.isBlank()) {
+        return List.of();
     }
-    return skills.split(",");
-    }
+    return Arrays.asList(skills.split(","));
+}
     public Integer getMaxWeeklyHours() {
         return maxWeeklyHours;
     }

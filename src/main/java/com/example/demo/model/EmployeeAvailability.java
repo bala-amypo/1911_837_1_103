@@ -1,5 +1,6 @@
 package com.example.demo.entity;
-import java.time.LocalTime;
+import java.time.LocalDate;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,64 +12,46 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 @Entity
 @Table(
-    name="shift_templates",
+    name="employee_availability",
     uniqueConstraints={
-        @UniqueConstraint(columnNames={"templateName","department_id"})
+        @UniqueConstraint(columnNames={"employee_id","availableDate"})
     })
-public class ShiftTemplate {
+public class EmployeeAvailability {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable=false)
-    private String templateName;
-    @Column(nullable=false)
-    private LocalTime startTime;
-    @Column(nullable=false)
-    private LocalTime endTime;
-    @Column
-    private String requiredSkills;
     @ManyToOne
-    @JoinColumn(name="department_id",nullable=false)
-    private Department department;
-    public ShiftTemplate(){}
-    public ShiftTemplate(String templateName,LocalTime startTime,LocalTime endTime,String requiredSkills,Department department){
-        this.templateName=templateName;
-        this.startTime=startTime;
-        this.endTime=endTime;
-        this.requiredSkills=requiredSkills;
-        this.department=department;
+    @JoinColumn(name="employee_id",nullable=false)
+    private Employee employee;
+    @Column(nullable=false)
+    private LocalDate availableDate;
+    @Column(nullable=false)
+    private Boolean available=true;
+    public EmployeeAvailability(){}
+    public EmployeeAvailability(Employee employee,LocalDate availableDate,Boolean available){
+        this.employee=employee;
+        this.availableDate=availableDate;
+        this.available=available;
     }
     public Long getId(){
     return id;
 }
-public String getTemplateName(){
-    return templateName;
+public Employee getEmployee(){
+    return employee;
 }
-public void setTemplateName(String templateName){
-    this.templateName=templateName;
+public void setEmployee(Employee employee){
+    this.employee=employee;
 }
-public LocalTime getStartTime(){
-    return startTime;
+public LocalDate getAvailableDate(){
+    return availableDate;
 }
-public void setStartTime(LocalTime startTime){
-    this.startTime=startTime;
+public void setAvailableDate(LocalDate availableDate){
+    this.availableDate=availableDate;
 }
-public LocalTime getEndTime(){
-    return endTime;
+public Boolean getAvailable(){
+    return available;
 }
-public void setEndTime(LocalTime endTime){
-    this.endTime=endTime;
-}
-public String getRequiredSkills(){
-    return requiredSkills;
-}
-public void setRequiredSkills(String requiredSkills){
-    this.requiredSkills=requiredSkills;
-}
-public Department getDepartment(){
-    return department;
-}
-public void setDepartment(Department department){
-    this.department=department;
+public void setAvailable(Boolean available){
+    this.available=available;
 }
 }

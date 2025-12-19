@@ -15,7 +15,7 @@ import jakarta.persistence.UniqueConstraint;
     uniqueConstraints={
         @UniqueConstraint(columnNames={"templateName","department_id"})
     })
-public class ShiftTemplate {
+public class ShiftTemplate{
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;

@@ -8,7 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 
-@Model
+@Entity
 @Table(name="Users",
     uniqueConstraints={@UniqueConstraint(columnNames="email")})
 public class User {

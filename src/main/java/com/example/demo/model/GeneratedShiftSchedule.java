@@ -90,7 +90,7 @@ import java.time.LocalTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public classGeneratedShiftSchedule {
+public class GeneratedShiftSchedule {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;

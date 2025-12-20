@@ -38,7 +38,7 @@ public class ScheduleServiceImpl implements ScheduleService{
             schedule.setEndTime(template.getEndTime());
             schedule.setShiftTemplate(template);
             schedule.setDepartment(department);
-            chedule.setEmployee(employee);
+            schedule.setEmployee(employee);
             generatedSchedules.add(scheduleRepository.save(schedule));
             break; 
                     }

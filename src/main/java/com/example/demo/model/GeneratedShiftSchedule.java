@@ -101,12 +101,12 @@ public classGeneratedShiftSchedule {
     @Column(nullable=false)
     private LocalTime endTime;
     @ManyToOne(optional=false)
-    @JoinColumn(name = "shift_template_id",nullable = false)
+    @JoinColumn(name="shift_template_id",nullable=false)
     private ShiftTemplate shiftTemplate;
-    @ManyToOne(optional = false)
-    @JoinColumn(name="department_id",nullable = false)
+    @ManyToOne(optional=false)
+    @JoinColumn(name="department_id",nullable=false)
     private Department department;
-    @ManyToOne(optional = false)
-    @JoinColumn(name="employee_id",nullable = false)
+    @ManyToOne(optional=false)
+    @JoinColumn(name="employee_id",nullable=false)
     private Employee employee;
 }

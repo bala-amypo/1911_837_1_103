@@ -80,8 +80,8 @@ import java.util.Arrays;
 import java.util.List;
 @Entity
 @Table(
-    name = "shift_templates",
-    uniqueConstraints=@UniqueConstraint(columnNames = {"templateName", "department_id"})
+    name="shift_templates",
+    uniqueConstraints=@UniqueConstraint(columnNames={"templateName","department_id"})
 )
 @Getter
 @Setter
@@ -89,21 +89,21 @@ import java.util.List;
 @AllArgsConstructor
 public class ShiftTemplate{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable = false)
+    @Column(nullable=false)
     private String templateName;
-    @Column(nullable = false)
+    @Column(nullable=false)
     private LocalTime startTime;
-    @Column(nullable = false)
+    @Column(nullable=false)
     private LocalTime endTime;
     @Column
     private String requiredSkills;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "department_id", nullable=false)
+    @ManyToOne(optional=false)
+    @JoinColumn(name="department_id",nullable=false)
     private Department department;
-    public List<String> getRequiredSkillsList() {
-        if(requiredSkills==null||requiredSkills.isBlank()) {
+    public List<String>getRequiredSkillsList() {
+        if(requiredSkills==null||requiredSkills.isBlank()){
             return List.of();
         }
         return Arrays.asList(requiredSkills.split(","));

@@ -9,7 +9,7 @@ import java.util.List;
 @Service
 public class ShiftTemplateServiceImpl implements ShiftTemplateService{
     private final ShiftTemplateRepository shiftTemplateRepository;
-    public ShiftTemplateServiceImpl(ShiftTemplateRepository shiftTemplateRepository) {
+    public ShiftTemplateServiceImpl(ShiftTemplateRepository shiftTemplateRepository){
         this.shiftTemplateRepository = shiftTemplateRepository;
     }
     @Override
@@ -17,25 +17,24 @@ public class ShiftTemplateServiceImpl implements ShiftTemplateService{
         shiftTemplateRepository.findByTemplateNameAndDepartment_Id(
                 template.getTemplateName(),
                 template.getDepartment().getId()
-        ).ifPresent(existing -> {
+        ).ifPresent(existing->{
             throw new ResourceExistsException("Shift template unique constraint violation");
         });
-        if (!template.getEndTime().isAfter(template.getStartTime())) {
+        if (!template.getEndTime().isAfter(template.getStartTime())){
             throw new IllegalArgumentException("endTime must be after startTime");
         }
         return shiftTemplateRepository.save(template);
     }
     @Override
-    public List<ShiftTemplate> getByDepartment(Long departmentId) {
+    public List<ShiftTemplate> getByDepartment(Long departmentId){
         return shiftTemplateRepository.findByDepartment_Id(departmentId);
     }
     @Override
-    public List<ShiftTemplate> getAll() {
+    public List<ShiftTemplate> getAll(){
         return shiftTemplateRepository.findAll();
     }
     @Override
-    public ShiftTemplate get(Long id) {
-        return shiftTemplateRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Shift template not found"));
+    public ShiftTemplate get(Long id){
+        return shiftTemplateRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Shift template not found"));
     }
 }

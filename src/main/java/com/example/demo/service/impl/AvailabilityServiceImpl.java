@@ -1,5 +1,4 @@
 package com.example.demo.service.impl;
-
 import com.example.demo.exception.ResourceExistsException;
 import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.EmployeeAvailability;
@@ -22,13 +21,11 @@ public class AvailabilityServiceImpl implements AvailabilityService{
         ).ifPresent(existing -> {
             throw new ResourceExistsException("Availability record exists");
         });
-
         return availabilityRepository.save(availability);
     }
     @Override
     public EmployeeAvailability update(Long id, EmployeeAvailability availability){
-        EmployeeAvailability existing = availabilityRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Availability not found"));
+        EmployeeAvailability existing = availabilityRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Availability not found"));
         existing.setAvailableDate(availability.getAvailableDate());
         existing.setAvailable(availability.getAvailable());
         return availabilityRepository.save(existing);

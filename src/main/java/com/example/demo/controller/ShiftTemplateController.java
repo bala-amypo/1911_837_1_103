@@ -22,11 +22,11 @@ public class ShiftTemplateController{
         return ResponseEntity.ok(shiftTemplateService.getAll());
     }
     @GetMapping("/{id}")
-    public ResponseEntity<ShiftTemplate>get(@PathVariable Long id) {
+    public ResponseEntity<ShiftTemplate>get(@PathVariable Long id){
         return ResponseEntity.ok(shiftTemplateService.get(id));
     }
     @GetMapping("/department/{departmentId}")
-    public ResponseEntity<List<ShiftTemplate>>getByDepartment(@PathVariable Long departmentId) {
+    public ResponseEntity<List<ShiftTemplate>>getByDepartment(@PathVariable Long departmentId){
         return ResponseEntity.ok(shiftTemplateService.getByDepartment(departmentId));
     }
 }

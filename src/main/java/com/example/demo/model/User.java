@@ -62,10 +62,12 @@
 //      }
 // }
 package com.example.demo.model;
+
 import jakarta.persistence.*;
 import lombok.*;
+
 @Entity
-@Table(name="users",uniqueConstraints=@UniqueConstraint(columnNames = "email"))
+@Table(name="users",uniqueConstraints=@UniqueConstraint(columnNames="email"))
 @Getter
 @Setter
 @NoArgsConstructor
@@ -76,11 +78,11 @@ public class User{
     private Long id;
     @Column(nullable=false)
     private String name;
-    @Column(nullable=false, unique = true)
+    @Column(nullable=false,unique=true)
     private String email;
     @Column(nullable=false)
     private String password;
     @Column(nullable=false)
-    private String role="ANALYST";
+    private String role="ANALYST"; 
 }
 

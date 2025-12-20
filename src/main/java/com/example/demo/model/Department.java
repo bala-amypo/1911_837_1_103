@@ -72,20 +72,18 @@
 // }
 // }
 package com.example.demo.model;
-
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
-
 @Entity
 @Table(name="departments",uniqueConstraints=@UniqueConstraint(columnNames="name"))
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Department {
+public class Department{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

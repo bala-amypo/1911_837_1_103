@@ -12,7 +12,6 @@ public class EmployeeServiceImpl implements EmployeeService{
     public EmployeeServiceImpl(EmployeeRepository employeeRepository){
         this.employeeRepository = employeeRepository;
     }
-
     @Override
     public Employee createEmployee(Employee employee){
         if (employeeRepository.existsByEmail(employee.getEmail())){
@@ -37,21 +36,19 @@ public class EmployeeServiceImpl implements EmployeeService{
                 employeeRepository.existsByEmail(employee.getEmail())){
             throw new ResourceExistsException("Employee with this email exists");
         }
-        if (employee.getMaxWeeklyHours() == null || employee.getMaxWeeklyHours() <= 0){
+        if (employee.getMaxWeeklyHours()==null||employee.getMaxWeeklyHours() <= 0){
             throw new IllegalArgumentException("maxWeeklyHours must be greater than 0");
         }
         existing.setFullName(employee.getFullName());
         existing.setEmail(employee.getEmail());
-        existing.setRole(employee.getRole() != null ? employee.getRole() : "STAFF");
+        existing.setRole(employee.getRole()!=null?employee.getRole():"STAFF");
         existing.setSkills(employee.getSkills());
         existing.setMaxWeeklyHours(employee.getMaxWeeklyHours());
         return employeeRepository.save(existing);
     }
-
     @Override
     public void deleteEmployee(Long id){
-        Employee existing = employeeRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+        Employee existing = employeeRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("Employee not found"));
         employeeRepository.delete(existing);
     }
     @Override
@@ -60,7 +57,6 @@ public class EmployeeServiceImpl implements EmployeeService{
     }
     @Override
     public Employee findByEmail(String email){
-        return employeeRepository.findByEmail(email)
-                .orElseThrow(()->new ResourceNotFoundException("Employee not found"));
+        return employeeRepository.findByEmail(email).orElseThrow(()->new ResourceNotFoundException("Employee not found"));
     }
 }

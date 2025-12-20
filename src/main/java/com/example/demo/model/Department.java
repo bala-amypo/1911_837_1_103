@@ -71,3 +71,37 @@
 //     return list;
 // }
 // }
+package com.example.demo.model;
+
+import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
+
+@Entity
+@Table(name="departments",uniqueConstraints=@UniqueConstraint(columnNames="name"))
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class Department {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(nullable=false,unique=true)
+    private String name;
+    @Column
+    private String description;
+    @Column
+    private String requiredSkills;
+    @Column(nullable=false,updatable=false)
+    private LocalDateTime createdAt=LocalDateTime.now();
+    public List<String> getRequiredSkillsList() {
+        if (requiredSkills==null||requiredSkills.isBlank()) {
+            return List.of();
+        }
+        return Arrays.asList(requiredSkills.split(","));
+    }
+}
+

@@ -55,7 +55,6 @@
 //     this.available=available;
 // }
 // }
-
 package com.example.demo.model;
 import jakarta.persistence.*;
 import lombok.*;
@@ -76,8 +75,8 @@ public class EmployeeAvailability{
     @ManyToOne(optional=false)
     @JoinColumn(name="employee_id",nullable=false)
     private Employee employee;
-    @Column(nullable =false)
+    @Column(nullable=false)
     private LocalDate availableDate;
-    @Column(nullable = false)
-    private Boolean available = true; 
+    @Column(nullable=false)
+    private Boolean available=true; 
 }

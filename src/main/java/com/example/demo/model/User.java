@@ -62,10 +62,8 @@
 //      }
 // }
 package com.example.demo.model;
-
 import jakarta.persistence.*;
 import lombok.*;
-
 @Entity
 @Table(name="users",uniqueConstraints=@UniqueConstraint(columnNames="email"))
 @Getter
@@ -85,4 +83,3 @@ public class User{
     @Column(nullable=false)
     private String role="ANALYST"; 
 }
-

@@ -55,3 +55,29 @@
 //     this.available=available;
 // }
 // }
+
+package com.example.demo.model;
+import jakarta.persistence.*;
+import lombok.*;
+import java.time.LocalDate;
+@Entity
+@Table(
+    name = "employee_availability",
+    uniqueConstraints = @UniqueConstraint(columnNames ={"employee_id","availableDate"})
+)
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class EmployeeAvailability{
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    private Long id;
+    @ManyToOne(optional=false)
+    @JoinColumn(name="employee_id",nullable=false)
+    private Employee employee;
+    @Column(nullable =false)
+    private LocalDate availableDate;
+    @Column(nullable = false)
+    private Boolean available = true; 
+}

@@ -48,4 +48,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         Employee existing = getEmployee(id);
         employeeRepository.delete(existing);
     }
+    @Override
+    public Employee findByEmail(String email) {
+    return employeeRepository.findByEmail(email).orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+}
+
 }

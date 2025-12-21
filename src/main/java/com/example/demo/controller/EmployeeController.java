@@ -12,9 +12,9 @@ public class EmployeeController {
         this.employeeService=employeeService;
     }
     @PostMapping("/register")
-    public ResponseEntity<Employee> register(@Valid @RequestBody Employee employee) {
-    Employee saved = employeeService.createEmployee(employee);
-    return ResponseEntity.status(201).body(saved); 
+    public ResponseEntity<Employee> register(@RequestBody Employee employee){
+        Employee saved=employeeService.createEmployee(employee);
+        return ResponseEntity.ok(saved);
     }
     @GetMapping("/all")
     public ResponseEntity<List<Employee>> getAll(){

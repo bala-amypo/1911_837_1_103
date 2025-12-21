@@ -8,11 +8,11 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 @RestController
 @RequestMapping("/api/employees")
-public class EmployeeController {
+public class EmployeeController{
     private static final Logger logger = LoggerFactory.getLogger(EmployeeController.class);
     private final EmployeeService employeeService;
     public EmployeeController(EmployeeService employeeService){
-        this.employeeService = employeeService;
+        this.employeeService=employeeService;
     }
     @PostMapping("/register")
     public ResponseEntity<Employee> register(@RequestBody Employee employee){
@@ -29,9 +29,9 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.getEmployee(id));
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employee){
-        logger.info("Updating employee with id {}: {}", id, employee);
-        return ResponseEntity.ok(employeeService.updateEmployee(id, employee));
+    public ResponseEntity<Employee> updateEmployee(@PathVariable Long id,@RequestBody Employee employee){
+        logger.info("Updating employee with id {}: {}",id,employee);
+        return ResponseEntity.ok(employeeService.updateEmployee(id,employee));
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteEmployee(@PathVariable Long id){

@@ -32,16 +32,16 @@ public class Employee{
         }
         return Arrays.asList(skills.split(","));
     }
-    // @Override
-    // public String toString() {
-    //     return "Employee{" +
-    //             "id=" + id +
-    //             ", fullName='" + fullName + '\'' +
-    //             ", email='" + email + '\'' +
-    //             ", role='" + role + '\'' +
-    //             ", skills='" + skills + '\'' +
-    //             ", maxWeeklyHours=" + maxWeeklyHours +
-    //             ", createdAt=" + createdAt +
-    //             '}';
-    // }
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", role='" + role + '\'' +
+                ", skills='" + skills + '\'' +
+                ", maxWeeklyHours=" + maxWeeklyHours +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }

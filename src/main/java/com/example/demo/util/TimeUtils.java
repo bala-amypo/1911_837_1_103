@@ -1,11 +1,10 @@
 package com.example.demo.util;
 
 import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
+import java.time.Duration;
 
 public class TimeUtils {
-    // Test 50: Calculate minutes between two times 
     public static long minutesBetween(LocalTime start, LocalTime end) {
-        return ChronoUnit.MINUTES.between(start, end);
+        return Duration.between(start, end).toMinutes();
     }
 }

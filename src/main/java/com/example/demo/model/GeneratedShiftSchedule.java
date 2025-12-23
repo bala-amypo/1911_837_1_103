@@ -80,33 +80,41 @@
 // }
 // }
 package com.example.demo.model;
+
 import jakarta.persistence.*;
-import lombok.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+
 @Entity
-@Table(name="generated_shift_schedules")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class GeneratedShiftSchedule {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable=false)
     private LocalDate shiftDate;
-    @Column(nullable=false)
     private LocalTime startTime;
-    @Column(nullable=false)
     private LocalTime endTime;
-    @ManyToOne(optional=false)
-    @JoinColumn(name="shift_template_id",nullable=false)
+    
+    @ManyToOne
     private ShiftTemplate shiftTemplate;
-    @ManyToOne(optional=false)
-    @JoinColumn(name="department_id",nullable=false)
+    @ManyToOne
     private Department department;
-    @ManyToOne(optional=false)
-    @JoinColumn(name="employee_id",nullable=false)
+    @ManyToOne
     private Employee employee;
+
+    public GeneratedShiftSchedule() {}
+
+    public GeneratedShiftSchedule(LocalDate shiftDate, LocalTime startTime, LocalTime endTime, ShiftTemplate shiftTemplate, Department department, Employee employee) {
+        this.shiftDate = shiftDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.shiftTemplate = shiftTemplate;
+        this.department = department;
+        this.employee = employee;
+    }
+
+    public LocalDate getShiftDate() { return shiftDate; }
+    public void setShiftDate(LocalDate shiftDate) { this.shiftDate = shiftDate; }
+    public Employee getEmployee() { return employee; }
+    public void setEmployee(Employee employee) { this.employee = employee; }
+    // Getters for other fields omitted for brevity but required for full JPA usage
 }

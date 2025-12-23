@@ -14,7 +14,10 @@ public class ShiftTemplateServiceImpl implements ShiftTemplateService {
         this.repository = repository;
         this.departmentRepository = departmentRepository;
     }
-
+    // Add to ShiftTemplateServiceImpl
+    public List<ShiftTemplate> getAll() {
+        return repository.findAll();
+    }
     @Override
     public ShiftTemplate create(ShiftTemplate template) {
         // Test 12: Invalid time 

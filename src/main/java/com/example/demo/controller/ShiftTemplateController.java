@@ -20,12 +20,17 @@ public class ShiftTemplateController {
 
     @GetMapping("/")
     public ResponseEntity<List<ShiftTemplate>> list() {
-        return ResponseEntity.ok(service.getAll()); [cite_start]// [cite: 78]
+        return ResponseEntity.ok(service.getAll());
     }
-    
-    // Additional endpoint supported by helper docs and useful for completeness
+
     @GetMapping("/department/{departmentId}")
     public ResponseEntity<List<ShiftTemplate>> listByDept(@PathVariable Long departmentId) {
         return ResponseEntity.ok(service.getByDepartment(departmentId));
+    }
+    
+    @PostMapping("/department/{departmentId}")
+    public ResponseEntity<ShiftTemplate> create(@RequestBody ShiftTemplate template, @PathVariable Long departmentId) {
+        template.setDepartment(deptRepo.findById(departmentId).orElseThrow(() -> new RuntimeException("not found")));
+        return ResponseEntity.ok(service.create(template));
     }
 }

@@ -73,39 +73,53 @@
 // }
 // }
 package com.example.demo.model;
+
 import jakarta.persistence.*;
-import lombok.*;
 import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
-@Table(
-    name="shift_templates",
-    uniqueConstraints=@UniqueConstraint(columnNames={"templateName","department_id"})
-)
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class ShiftTemplate{
+public class ShiftTemplate {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable=false)
-    private String templateName;
-    @Column(nullable=false)
+    private String templateName; [cite_start]// [cite: 188]
     private LocalTime startTime;
-    @Column(nullable=false)
     private LocalTime endTime;
-    @Column
     private String requiredSkills;
-    @ManyToOne(optional=false)
-    @JoinColumn(name="department_id",nullable=false)
+    
+    @ManyToOne
     private Department department;
-    public List<String>getRequiredSkillsList() {
-        if(requiredSkills==null||requiredSkills.isBlank()){
-            return List.of();
-        }
-        return Arrays.asList(requiredSkills.split(","));
+
+    public ShiftTemplate() {}
+
+    // Constructor used in Test 11 
+    public ShiftTemplate(String templateName, LocalTime startTime, LocalTime endTime, String requiredSkills, Department department) {
+        this.templateName = templateName;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.requiredSkills = requiredSkills;
+        this.department = department;
     }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getTemplateName() { return templateName; }
+    public void setTemplateName(String templateName) { this.templateName = templateName; }
+    public LocalTime getStartTime() { return startTime; }
+    public void setStartTime(LocalTime startTime) { this.startTime = startTime; }
+    public LocalTime getEndTime() { return endTime; }
+    public void setEndTime(LocalTime endTime) { this.endTime = endTime; }
+    
+    // Test 22: Skill matching 
+    public Set<String> getRequiredSkills() {
+        if (requiredSkills == null || requiredSkills.isEmpty()) return new HashSet<>();
+        return new HashSet<>(Arrays.asList(requiredSkills.split(",")));
+    }
+    public void setRequiredSkills(String requiredSkills) { this.requiredSkills = requiredSkills; }
+    
+    public Department getDepartment() { return department; }
+    public void setDepartment(Department department) { this.department = department; }
 }

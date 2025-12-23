@@ -72,34 +72,43 @@
 // }
 // }
 package com.example.demo.model;
+
 import jakarta.persistence.*;
-import lombok.*;
 import java.time.LocalDateTime;
 import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
-@Table(name="departments",uniqueConstraints=@UniqueConstraint(columnNames="name"))
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-public class Department{
+public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(nullable=false,unique=true)
-    private String name;
-    @Column
+    private String name; [cite_start]// [cite: 176]
     private String description;
-    @Column
-    private String requiredSkills;
-    @Column(nullable=false,updatable=false)
-    private LocalDateTime createdAt=LocalDateTime.now();
-    public List<String> getRequiredSkillsList() {
-        if (requiredSkills==null||requiredSkills.isBlank()) {
-            return List.of();
-        }
-        return Arrays.asList(requiredSkills.split(","));
-    }
-}
+    private String requiredSkills; [cite_start]// [cite: 178]
+    private LocalDateTime createdAt;
 
+    public Department() {}
+
+    // Constructor used in Test 8 
+    public Department(String name, String description, String requiredSkills) {
+        this.name = name;
+        this.description = description;
+        this.requiredSkills = requiredSkills;
+    }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
+    
+    // Test 46: Parsing required skills 
+    public Set<String> getRequiredSkills() {
+        if (requiredSkills == null || requiredSkills.isEmpty()) return new HashSet<>();
+        return new HashSet<>(Arrays.asList(requiredSkills.split(",")));
+    }
+    public void setRequiredSkills(String requiredSkills) { this.requiredSkills = requiredSkills; }
+}

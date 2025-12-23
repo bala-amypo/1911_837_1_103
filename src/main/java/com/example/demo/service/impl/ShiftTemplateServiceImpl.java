@@ -14,17 +14,14 @@ public class ShiftTemplateServiceImpl implements ShiftTemplateService {
         this.repository = repository;
         this.departmentRepository = departmentRepository;
     }
-    // Add to ShiftTemplateServiceImpl
-    public List<ShiftTemplate> getAll() {
-        return repository.findAll();
-    }
+
     @Override
     public ShiftTemplate create(ShiftTemplate template) {
-        // Test 12: Invalid time 
+        [cite_start]// Test 12: Invalid time [cite: 31]
         if (template.getEndTime().isBefore(template.getStartTime())) {
             throw new RuntimeException("after");
         }
-        // Test 33: Unique within department 
+        [cite_start]// Test 33: Unique within department [cite: 61]
         if (repository.findByTemplateNameAndDepartment_Id(template.getTemplateName(), template.getDepartment().getId()).isPresent()) {
             throw new RuntimeException("unique");
         }
@@ -34,5 +31,10 @@ public class ShiftTemplateServiceImpl implements ShiftTemplateService {
     @Override
     public List<ShiftTemplate> getByDepartment(Long departmentId) {
         return repository.findByDepartment_Id(departmentId);
+    }
+
+    @Override
+    public List<ShiftTemplate> getAll() {
+        return repository.findAll(); // Used by Controller list()
     }
 }

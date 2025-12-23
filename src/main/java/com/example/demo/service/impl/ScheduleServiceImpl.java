@@ -3,11 +3,13 @@ package com.example.demo.service.impl;
 import com.example.demo.model.*;
 import com.example.demo.repository.*;
 import com.example.demo.service.ScheduleService;
+import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+@Service
 public class ScheduleServiceImpl implements ScheduleService {
     private final ShiftTemplateRepository templateRepo;
     private final AvailabilityRepository availabilityRepo;
@@ -28,7 +30,6 @@ public class ScheduleServiceImpl implements ScheduleService {
     @Override
     public List<GeneratedShiftSchedule> generateForDate(LocalDate date) {
         List<GeneratedShiftSchedule> schedules = new ArrayList<>();
-        // Logic outlined in Test 28, 29, 36
         
         List<EmployeeAvailability> availableEmployees = availabilityRepo.findByAvailableDateAndAvailable(date, true);
         List<Department> departments = deptRepo.findAll();
@@ -37,16 +38,10 @@ public class ScheduleServiceImpl implements ScheduleService {
             List<ShiftTemplate> templates = templateRepo.findByDepartment_Id(dept.getId());
             
             for (ShiftTemplate template : templates) {
-                // Find first qualified employee
                 for (EmployeeAvailability av : availableEmployees) {
                     Employee emp = av.getEmployee();
                     Set<String> empSkills = emp.getSkills();
                     Set<String> templateSkills = template.getRequiredSkills();
-                    
-                    // Simple logic: if emp has ALL template skills. 
-                    // Test 29/54 imply strict matching or subset matching logic.
-                    // Test 29: Template=PYTHON, Emp=JAVA -> Empty.
-                    // Test 36: Matches correctly.
                     
                     boolean matches = true;
                     for (String req : templateSkills) {
@@ -61,7 +56,7 @@ public class ScheduleServiceImpl implements ScheduleService {
                                 date, template.getStartTime(), template.getEndTime(), 
                                 template, dept, emp);
                         schedules.add(scheduleRepo.save(sch));
-                        break; // Move to next template (simplistic allocation)
+                        break; 
                     }
                 }
             }

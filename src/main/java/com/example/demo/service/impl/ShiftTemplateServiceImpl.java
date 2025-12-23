@@ -4,8 +4,10 @@ import com.example.demo.model.ShiftTemplate;
 import com.example.demo.repository.DepartmentRepository;
 import com.example.demo.repository.ShiftTemplateRepository;
 import com.example.demo.service.ShiftTemplateService;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
+@Service
 public class ShiftTemplateServiceImpl implements ShiftTemplateService {
     private final ShiftTemplateRepository repository;
     private final DepartmentRepository departmentRepository;

@@ -23,6 +23,12 @@ public class AppConfig {
                                                    EmployeeRepository employeeRepository) {
         return new AvailabilityServiceImpl(availabilityRepository, employeeRepository);
     }
+
+    @Bean
+    public EmployeeService employeeService(EmployeeRepository employeeRepository) {
+        return new EmployeeServiceImpl(employeeRepository);
+    }
+
     @Bean
     public DepartmentService departmentService(DepartmentRepository departmentRepository) {
         return new DepartmentServiceImpl(departmentRepository);

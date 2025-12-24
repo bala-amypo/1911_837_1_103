@@ -40,4 +40,16 @@ public class ShiftTemplate {
     public void setEndTime(LocalTime endTime) { this.endTime = endTime; }
 
     public String getRequiredSkills() { return requiredSkills; }
+    public Department getDepartment() {
+    return department;
+}
+
+public void setRequiredSkills(String requiredSkills) {
+    this.requiredSkills = requiredSkills;
+}
+
+public void setDepartment(Department department) {
+    this.department = department;
+}
+
 }

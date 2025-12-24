@@ -29,4 +29,8 @@ public class GeneratedShiftSchedule {
     public void setShiftDate(LocalDate shiftDate) {
         this.shiftDate = shiftDate;
     }
+    public void setEmployee(Employee employee) {
+    this.employee = employee;
+}
+
 }

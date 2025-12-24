@@ -10,20 +10,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/schedules")
 public class ScheduleController {
-    private final ScheduleService service;
 
-    public ScheduleController(ScheduleService service) {
-        this.service = service;
+    private final ScheduleService scheduleService;
+
+    public ScheduleController(ScheduleService scheduleService) {
+        this.scheduleService = scheduleService;
     }
 
     @PostMapping("/generate/{date}")
     public ResponseEntity<List<GeneratedShiftSchedule>> generate(@PathVariable String date) {
-        return ResponseEntity.ok(service.generateForDate(LocalDate.parse(date))); // 
+        return ResponseEntity.ok(scheduleService.generateForDate(LocalDate.parse(date)));
     }
-    
-    // Test 62 calls this 
+
     @GetMapping("/date/{date}")
     public ResponseEntity<List<GeneratedShiftSchedule>> byDate(@PathVariable String date) {
-        return ResponseEntity.ok(service.getByDate(LocalDate.parse(date)));
+        return ResponseEntity.ok(scheduleService.getByDate(LocalDate.parse(date)));
     }
 }

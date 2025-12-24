@@ -3,9 +3,7 @@ package com.example.demo.service.impl;
 import com.example.demo.model.User;
 import com.example.demo.repository.UserRepository;
 import com.example.demo.service.UserService;
-import org.springframework.stereotype.Service;  // ✅ ADD THIS IMPORT
 
-@Service  // ✅ ADD THIS ANNOTATION
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
@@ -17,7 +15,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User register(User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
-            throw new RuntimeException("User email already exists in system"); // contains "exists" ✅
+            throw new RuntimeException("User email already exists in system");
         }
         return userRepository.save(user);
     }
@@ -25,6 +23,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findByEmail(String email) {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new RuntimeException("User not found in system")); // contains "not found" ✅
+                .orElseThrow(() -> new RuntimeException("User not found in system"));
     }
 }

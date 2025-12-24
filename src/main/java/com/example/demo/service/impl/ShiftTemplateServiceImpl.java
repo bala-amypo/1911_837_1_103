@@ -7,7 +7,7 @@ import com.example.demo.repository.ShiftTemplateRepository;
 import com.example.demo.service.ShiftTemplateService;
 import java.time.LocalTime;
 import java.util.List;
-import org.springframework.stereotype.;
+import org.springframework.stereotype.Service;
 @Service
 public class ShiftTemplateServiceImpl implements ShiftTemplateService {
 

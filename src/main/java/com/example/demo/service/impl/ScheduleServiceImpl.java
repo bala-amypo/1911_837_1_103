@@ -5,7 +5,8 @@ import com.example.demo.repository.*;
 import com.example.demo.service.ScheduleService;
 import java.time.LocalDate;
 import java.util.List;
-
+import org.springframework.stereotype.Service;
+@Service
 public class ScheduleServiceImpl implements ScheduleService {
 
     private final ShiftTemplateRepository shiftTemplateRepository;

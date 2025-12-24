@@ -1,6 +1,11 @@
 package com.example.demo.security;
 
-import com.example.demo.security.JwtFilter;
+import com.example.demo.service.EmployeeService;
+import com.example.demo.service.DepartmentService;
+import com.example.demo.service.impl.EmployeeServiceImpl;
+import com.example.demo.service.impl.DepartmentServiceImpl;
+import com.example.demo.repository.EmployeeRepository;
+import com.example.demo.repository.DepartmentRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,7 +20,12 @@ public class SecurityConfig {
     }
 
     @Bean
-    public JwtFilter jwtFilter() {
-        return new JwtFilter();
+    public EmployeeService employeeService(EmployeeRepository employeeRepository) {
+        return new EmployeeServiceImpl(employeeRepository);
+    }
+
+    @Bean
+    public DepartmentService departmentService(DepartmentRepository departmentRepository) {
+        return new DepartmentServiceImpl(departmentRepository);
     }
 }

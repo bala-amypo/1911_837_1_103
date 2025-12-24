@@ -6,5 +6,5 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface GeneratedShiftScheduleRepository extends JpaRepository<GeneratedShiftSchedule, Long> {
-    List<GeneratedShiftSchedule> findByShiftDate(LocalDate date);
+    List<GeneratedShiftSchedule> findByShiftDate(LocalDate shiftDate); // 
 }

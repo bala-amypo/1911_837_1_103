@@ -35,5 +35,4 @@ public class GeneratedShiftSchedule {
     public void setShiftDate(LocalDate shiftDate) { this.shiftDate = shiftDate; }
     public Employee getEmployee() { return employee; }
     public void setEmployee(Employee employee) { this.employee = employee; }
-    // Getters for other fields omitted for brevity but required for full JPA usage
 }

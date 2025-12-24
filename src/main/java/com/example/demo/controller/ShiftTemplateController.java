@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.exception.ResourceNotFoundException;
 import com.example.demo.model.ShiftTemplate;
 import com.example.demo.repository.DepartmentRepository;
 import com.example.demo.service.ShiftTemplateService;
@@ -30,7 +31,8 @@ public class ShiftTemplateController {
     
     @PostMapping("/department/{departmentId}")
     public ResponseEntity<ShiftTemplate> create(@RequestBody ShiftTemplate template, @PathVariable Long departmentId) {
-        template.setDepartment(deptRepo.findById(departmentId).orElseThrow(() -> new RuntimeException("not found")));
+        template.setDepartment(deptRepo.findById(departmentId)
+            .orElseThrow(() -> new ResourceNotFoundException("Department not found")));
         return ResponseEntity.ok(service.create(template));
     }
 }

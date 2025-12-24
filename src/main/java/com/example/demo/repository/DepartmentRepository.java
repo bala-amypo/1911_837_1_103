@@ -6,7 +6,11 @@ import java.util.Optional;
 import java.util.List;
 
 public interface DepartmentRepository extends JpaRepository<Department, Long> {
-    Optional<Department> findById(Long id);
-    boolean existsByName(String name);
+
+    // ✅ MUST match entity field name (departmentName)
+    boolean existsByDepartmentName(String departmentName);
+
+    Optional<Department> findByDepartmentName(String departmentName);
+
     List<Department> findAll();
 }

@@ -18,7 +18,7 @@ public class DepartmentServiceImpl implements DepartmentService {
 
     @Override
     public Department create(Department department) {
-        if (department == null || department.getDepartmentName() == null || department.getDepartmentName().isBlank()) {
+if (department == null || department.getDepartmentName().isBlank()) {
             throw new RuntimeException("Department name already exists in system"); // contains **exists** if used
         }
         return departmentRepository.save(department);

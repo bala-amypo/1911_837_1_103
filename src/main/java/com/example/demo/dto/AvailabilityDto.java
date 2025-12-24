@@ -6,9 +6,16 @@ public class AvailabilityDto {
     private Boolean available;
     private LocalDate availableDate;
 
-    // Test 49: Null date check 
+    public AvailabilityDto() {}
+
+    public AvailabilityDto(Boolean available, LocalDate availableDate) {
+        this.available = available;
+        this.availableDate = availableDate;
+    }
+
     public Boolean getAvailable() { return available; }
     public void setAvailable(Boolean available) { this.available = available; }
+
     public LocalDate getAvailableDate() { return availableDate; }
     public void setAvailableDate(LocalDate availableDate) { this.availableDate = availableDate; }
 }

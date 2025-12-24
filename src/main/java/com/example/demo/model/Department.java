@@ -4,37 +4,42 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Table(name = "departments")
 public class Department {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
-    private String name;
-
-    private String description;
-
-    private String requiredSkills;
+    private String departmentName; // this is the actual field
 
     private LocalDateTime createdAt = LocalDateTime.now();
 
     public Department() {}
 
-    public Department(String name, String description, String requiredSkills) {
-        this.name = name;
-        this.description = description;
-        this.requiredSkills = requiredSkills;
+    public Department(String departmentName) {
+        this.departmentName = departmentName;
     }
 
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    // ✅ Required Getter
+    public String getDepartmentName() {
+        return departmentName;
+    }
 
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+    // ✅ Required Setter
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
+    }
 
-    public String getDescription() { return description; }
-    public void setDescription(String description) { this.description = description; }
+    public Long getId() {
+        return id;
+    }
 
-    public String getRequiredSkills() { return requiredSkills; }
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
 }

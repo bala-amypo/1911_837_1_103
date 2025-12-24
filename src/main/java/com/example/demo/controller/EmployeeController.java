@@ -9,31 +9,20 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/employees")
 public class EmployeeController {
+    private final EmployeeService service;
 
-    private final EmployeeService employeeService;
-
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
-    }
-
-    @PostMapping("/register")
-    public ResponseEntity<Employee> register(@RequestBody Employee employee) {
-        return ResponseEntity.ok(employeeService.createEmployee(employee));
+    public EmployeeController(EmployeeService service) {
+        this.service = service;
     }
 
     @GetMapping("/all")
     public ResponseEntity<List<Employee>> list() {
-        return ResponseEntity.ok(employeeService.getAll());
+        return ResponseEntity.ok(service.getAll()); // 
     }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<Employee> get(@PathVariable Long id) {
-        return ResponseEntity.ok(employeeService.getEmployee(id));
-    }
-
+    
     @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable Long id) {
-        employeeService.deleteEmployee(id);
-        return ResponseEntity.ok("Deleted");
+        service.deleteEmployee(id);
+        return ResponseEntity.ok("Deleted"); // 
     }
 }

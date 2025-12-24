@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JwtUtil {
-    // Tests 23, 24, 59 mock this class, but methods must exist to compile , 
+    // Stub methods required for Test 23, 24, 59 compilation
     public boolean validateToken(String token) { return false; }
     public String getEmailFromToken(String token) { return null; }
 }

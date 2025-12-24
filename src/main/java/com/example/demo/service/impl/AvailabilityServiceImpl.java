@@ -1,13 +1,16 @@
 package com.example.demo.service.impl;
 
-import com.example.demo.model.Employee;
 import com.example.demo.model.EmployeeAvailability;
 import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.repository.AvailabilityRepository;
 import com.example.demo.service.AvailabilityService;
+import org.springframework.stereotype.Service; // ✅ add import
+
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
+@Service // ✅ add annotation
 public class AvailabilityServiceImpl implements AvailabilityService {
 
     private final AvailabilityRepository availabilityRepository;

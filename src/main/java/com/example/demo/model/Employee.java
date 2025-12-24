@@ -12,15 +12,14 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String fullName;
-    private String email; [cite_start]// [cite: 161]
-    private String role; [cite_start]// [cite: 162]
-    private String skills; [cite_start]// [cite: 163]
-    private Integer maxWeeklyHours; [cite_start]// [cite: 164]
+    private String email;
+    private String role;
+    private String skills;
+    private Integer maxWeeklyHours;
     private LocalDateTime createdAt;
 
     public Employee() {}
 
-    // Constructor used in Test 3 
     public Employee(String fullName, String email, String role, String skills, Integer maxWeeklyHours) {
         this.fullName = fullName;
         this.email = email;
@@ -38,12 +37,11 @@ public class Employee {
     public String getRole() { return role; }
     public void setRole(String role) { this.role = role; }
     
-    // Test 39 & 45: Skills parsing 
     public Set<String> getSkills() {
         if (skills == null || skills.isEmpty()) return new HashSet<>();
         return new HashSet<>(Arrays.asList(skills.split(",")));
     }
-    public void setSkills(String skills) { this.skills = skills; [cite_start]} // [cite: 163]
+    public void setSkills(String skills) { this.skills = skills; }
     
     public Integer getMaxWeeklyHours() { return maxWeeklyHours; }
     public void setMaxWeeklyHours(Integer maxWeeklyHours) { this.maxWeeklyHours = maxWeeklyHours; }

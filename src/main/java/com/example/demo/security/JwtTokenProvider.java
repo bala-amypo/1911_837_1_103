@@ -1,33 +1,33 @@
-package com.example.demo.security;
+// package com.example.demo.security;
 
-import com.example.demo.model.User;
-import com.example.demo.config.JwtUtil;
+// import com.example.demo.model.User;
+// import com.example.demo.config.JwtUtil;
 
-public class JwtTokenProvider {
+// public class JwtTokenProvider {
 
-    private final JwtUtil jwtUtil;
+//     private final JwtUtil jwtUtil;
 
-    public JwtTokenProvider(JwtUtil jwtUtil) {
-        this.jwtUtil = jwtUtil;
-    }
+//     public JwtTokenProvider(JwtUtil jwtUtil) {
+//         this.jwtUtil = jwtUtil;
+//     }
 
-    public String createToken(User user) {
-        return jwtUtil.generateToken(user);
-    }
+//     public String createToken(User user) {
+//         return jwtUtil.generateToken(user);
+//     }
 
-    public boolean validateToken(String token) {
-        return jwtUtil.validateToken(token);
-    }
+//     public boolean validateToken(String token) {
+//         return jwtUtil.validateToken(token);
+//     }
 
-    public String getEmail(String token) {
-        return jwtUtil.getEmailFromToken(token);
-    }
+//     public String getEmail(String token) {
+//         return jwtUtil.getEmailFromToken(token);
+//     }
 
-    public String getRole(String token) {
-        return jwtUtil.getRoleFromToken(token);
-    }
+//     public String getRole(String token) {
+//         return jwtUtil.getRoleFromToken(token);
+//     }
 
-    public Long getUserId(String token) {
-        return jwtUtil.getUserIdFromToken(token);
-    }
-}
+//     public Long getUserId(String token) {
+//         return jwtUtil.getUserIdFromToken(token);
+//     }
+// }

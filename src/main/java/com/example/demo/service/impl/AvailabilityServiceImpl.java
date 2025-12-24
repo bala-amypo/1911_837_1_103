@@ -4,9 +4,11 @@ import com.example.demo.model.EmployeeAvailability;
 import com.example.demo.repository.AvailabilityRepository;
 import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.service.AvailabilityService;
+import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.util.List;
 
+@Service
 public class AvailabilityServiceImpl implements AvailabilityService {
     private final AvailabilityRepository availabilityRepository;
     private final EmployeeRepository employeeRepository;
@@ -18,7 +20,6 @@ public class AvailabilityServiceImpl implements AvailabilityService {
 
     @Override
     public EmployeeAvailability create(EmployeeAvailability availability) {
-        // Test 20: Availability Unique check 
         if (availabilityRepository.findByEmployee_IdAndAvailableDate(
                 availability.getEmployee().getId(), availability.getAvailableDate()).isPresent()) {
             throw new RuntimeException("exists");
@@ -30,7 +31,6 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     public EmployeeAvailability update(Long id, EmployeeAvailability availability) {
         EmployeeAvailability existing = availabilityRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("not found"));
-        // Test 34: Update logic 
         existing.setAvailable(availability.getAvailable());
         return availabilityRepository.save(existing);
     }

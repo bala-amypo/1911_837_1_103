@@ -3,8 +3,10 @@ package com.example.demo.service.impl;
 import com.example.demo.model.Employee;
 import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.service.EmployeeService;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
 
@@ -14,15 +16,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee createEmployee(Employee employee) {
-        // Test 16: Duplicate email check 
         if (employeeRepository.existsByEmail(employee.getEmail())) {
             throw new RuntimeException("exists");
         }
-        // Test 30: Max hours check 
         if (employee.getMaxWeeklyHours() <= 0) {
             throw new RuntimeException("must be > 0");
         }
-        // Test 31: Default role 
         if (employee.getRole() == null) {
             employee.setRole("STAFF");
         }
@@ -38,14 +37,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee updateEmployee(Long id, Employee employee) {
         Employee existing = employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found")); // Test 47 
+                .orElseThrow(() -> new RuntimeException("not found"));
         
         if (!existing.getEmail().equals(employee.getEmail()) && 
             employeeRepository.existsByEmail(employee.getEmail())) {
             throw new RuntimeException("exists");
         }
         existing.setFullName(employee.getFullName());
-        // Update other fields as needed
         return employeeRepository.save(existing);
     }
 

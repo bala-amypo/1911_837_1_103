@@ -11,14 +11,13 @@ public class Department {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name; [cite_start]// [cite: 176]
+    private String name;
     private String description;
-    private String requiredSkills; [cite_start]// [cite: 178]
+    private String requiredSkills;
     private LocalDateTime createdAt;
 
     public Department() {}
 
-    // Constructor used in Test 8 
     public Department(String name, String description, String requiredSkills) {
         this.name = name;
         this.description = description;
@@ -32,7 +31,6 @@ public class Department {
     public String getDescription() { return description; }
     public void setDescription(String description) { this.description = description; }
     
-    // Test 46: Parsing required skills 
     public Set<String> getRequiredSkills() {
         if (requiredSkills == null || requiredSkills.isEmpty()) return new HashSet<>();
         return new HashSet<>(Arrays.asList(requiredSkills.split(",")));

@@ -11,7 +11,7 @@ public class ShiftTemplate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String templateName; [cite_start]// [cite: 188]
+    private String templateName;
     private LocalTime startTime;
     private LocalTime endTime;
     private String requiredSkills;
@@ -21,7 +21,6 @@ public class ShiftTemplate {
 
     public ShiftTemplate() {}
 
-    // Constructor used in Test 11 
     public ShiftTemplate(String templateName, LocalTime startTime, LocalTime endTime, String requiredSkills, Department department) {
         this.templateName = templateName;
         this.startTime = startTime;
@@ -39,7 +38,6 @@ public class ShiftTemplate {
     public LocalTime getEndTime() { return endTime; }
     public void setEndTime(LocalTime endTime) { this.endTime = endTime; }
     
-    // Test 22: Skill matching 
     public Set<String> getRequiredSkills() {
         if (requiredSkills == null || requiredSkills.isEmpty()) return new HashSet<>();
         return new HashSet<>(Arrays.asList(requiredSkills.split(",")));

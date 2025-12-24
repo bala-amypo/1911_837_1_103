@@ -13,11 +13,10 @@ public class EmployeeAvailability {
     private Employee employee;
     
     private LocalDate availableDate;
-    private Boolean available = true; [cite_start]// [cite: 204]
+    private Boolean available = true;
 
     public EmployeeAvailability() {}
 
-    // Constructor used in Test 20 and Test 36 , 
     public EmployeeAvailability(Employee employee, LocalDate availableDate, Boolean available) {
         this.employee = employee;
         this.availableDate = availableDate;

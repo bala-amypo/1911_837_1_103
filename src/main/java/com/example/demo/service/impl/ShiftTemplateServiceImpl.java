@@ -4,8 +4,10 @@ import com.example.demo.model.ShiftTemplate;
 import com.example.demo.repository.DepartmentRepository;
 import com.example.demo.repository.ShiftTemplateRepository;
 import com.example.demo.service.ShiftTemplateService;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
+@Service
 public class ShiftTemplateServiceImpl implements ShiftTemplateService {
     private final ShiftTemplateRepository repository;
     private final DepartmentRepository departmentRepository;
@@ -17,11 +19,9 @@ public class ShiftTemplateServiceImpl implements ShiftTemplateService {
 
     @Override
     public ShiftTemplate create(ShiftTemplate template) {
-        [cite_start]// Test 12: Invalid time [cite: 31]
         if (template.getEndTime().isBefore(template.getStartTime())) {
             throw new RuntimeException("after");
         }
-        [cite_start]// Test 33: Unique within department [cite: 61]
         if (repository.findByTemplateNameAndDepartment_Id(template.getTemplateName(), template.getDepartment().getId()).isPresent()) {
             throw new RuntimeException("unique");
         }
@@ -35,6 +35,6 @@ public class ShiftTemplateServiceImpl implements ShiftTemplateService {
 
     @Override
     public List<ShiftTemplate> getAll() {
-        return repository.findAll(); // Used by Controller list()
+        return repository.findAll();
     }
 }

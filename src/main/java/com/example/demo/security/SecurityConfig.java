@@ -35,14 +35,11 @@ public class SecurityConfig {
         return new DepartmentServiceImpl(departmentRepository);
     }
 
-    @Bean
-    public AvailabilityService availabilityService(AvailabilityRepository availabilityRepository,
-                                                   EmployeeRepository employeeRepository) {
-        return new AvailabilityServiceImpl(availabilityRepository, employeeRepository);
-    }
+  
 
     @Bean
     public ScheduleService scheduleService(GeneratedShiftScheduleRepository scheduleRepository) {
         return new ScheduleServiceImpl(scheduleRepository);
     }
+    
 }

@@ -24,6 +24,6 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest authRequest) {
-        return ResponseEntity.ok(new AuthResponse("dummy-swagger-token")); 
+        return ResponseEntity.ok(new AuthResponse("LOGIN SUCCESSFUL")); 
     }
 }

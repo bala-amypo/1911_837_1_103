@@ -19,12 +19,11 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) {
-        return ResponseEntity.ok(userService.register(user)); [cite_start]// [cite: 321]
+        return ResponseEntity.ok(userService.register(user));
     }
 
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody AuthRequest authRequest) {
-        // Returns a dummy token so the endpoint works in Swagger without security logic
-        return ResponseEntity.ok(new AuthResponse("dummy-swagger-token")); [cite_start]// [cite: 322]
+        return ResponseEntity.ok(new AuthResponse("dummy-swagger-token")); 
     }
 }

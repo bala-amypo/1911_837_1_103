@@ -1,30 +1,31 @@
-// package com.example.demo.service.impl;
+package com.example.demo.service.impl;
 
-// import com.example.demo.model.User;
-// import com.example.demo.repository.UserRepository;
-// import com.example.demo.service.UserService;
-// import org.springframework.stereotype.Service; // ✅ ADD
-// @Service // ✅ ADD this so Spring detects it
+import com.example.demo.exception.ValidationException;
+import com.example.demo.model.User;
+import com.example.demo.repository.UserRepository;
+import com.example.demo.service.UserService;
+import org.springframework.stereotype.Service;
 
-// public class UserServiceImpl implements UserService {
+@Service
+public class UserServiceImpl implements UserService {
 
-//     private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
-//     public UserServiceImpl(UserRepository userRepository) {
-//         this.userRepository = userRepository;
-//     }
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-//     @Override
-//     public User register(User user) {
-//         if (userRepository.existsByEmail(user.getEmail())) {
-//             throw new RuntimeException("User email already exists in system");
-//         }
-//         return userRepository.save(user);
-//     }
+    @Override
+    public User register(User user) {
+        if (userRepository.existsByEmail(user.getEmail())) {
+            throw new ValidationException("exists"); 
+        }
+        // Direct save without password encoding (No Security)
+        return userRepository.save(user);
+    }
 
-//     @Override
-//     public User findByEmail(String email) {
-//         return userRepository.findByEmail(email)
-//                 .orElseThrow(() -> new RuntimeException("User not found in system"));
-//     }
-// }
+    @Override
+    public User findByEmail(String email) {
+        return userRepository.findByEmail(email).orElse(null);
+    }
+}

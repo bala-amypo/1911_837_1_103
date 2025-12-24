@@ -1,5 +1,7 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.exception.ValidationException;
 import com.example.demo.model.Employee;
 import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.service.EmployeeService;
@@ -16,11 +18,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee createEmployee(Employee employee) {
+        // [cite: 169]
         if (employeeRepository.existsByEmail(employee.getEmail())) {
-            throw new RuntimeException("exists");
+            throw new ValidationException("exists");
         }
+        // [cite: 170]
         if (employee.getMaxWeeklyHours() <= 0) {
-            throw new RuntimeException("must be > 0");
+            throw new ValidationException("must be > 0");
         }
         if (employee.getRole() == null) {
             employee.setRole("STAFF");
@@ -30,18 +34,19 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getEmployee(Long id) {
+        // [cite: 287]
         return employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("not found"));
     }
 
     @Override
     public Employee updateEmployee(Long id, Employee employee) {
         Employee existing = employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("not found"));
         
         if (!existing.getEmail().equals(employee.getEmail()) && 
             employeeRepository.existsByEmail(employee.getEmail())) {
-            throw new RuntimeException("exists");
+            throw new ValidationException("exists");
         }
         existing.setFullName(employee.getFullName());
         return employeeRepository.save(existing);

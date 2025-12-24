@@ -1,5 +1,6 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.ValidationException;
 import com.example.demo.model.ShiftTemplate;
 import com.example.demo.repository.DepartmentRepository;
 import com.example.demo.repository.ShiftTemplateRepository;
@@ -19,11 +20,13 @@ public class ShiftTemplateServiceImpl implements ShiftTemplateService {
 
     @Override
     public ShiftTemplate create(ShiftTemplate template) {
+        // [cite: 197]
         if (template.getEndTime().isBefore(template.getStartTime())) {
-            throw new RuntimeException("after");
+            throw new ValidationException("after");
         }
+        // [cite: 196]
         if (repository.findByTemplateNameAndDepartment_Id(template.getTemplateName(), template.getDepartment().getId()).isPresent()) {
-            throw new RuntimeException("unique");
+            throw new ValidationException("unique");
         }
         return repository.save(template);
     }

@@ -1,5 +1,7 @@
 package com.example.demo.service.impl;
 
+import com.example.demo.exception.ResourceNotFoundException;
+import com.example.demo.exception.ValidationException;
 import com.example.demo.model.EmployeeAvailability;
 import com.example.demo.repository.AvailabilityRepository;
 import com.example.demo.repository.EmployeeRepository;
@@ -20,9 +22,10 @@ public class AvailabilityServiceImpl implements AvailabilityService {
 
     @Override
     public EmployeeAvailability create(EmployeeAvailability availability) {
+        // [cite: 208]
         if (availabilityRepository.findByEmployee_IdAndAvailableDate(
                 availability.getEmployee().getId(), availability.getAvailableDate()).isPresent()) {
-            throw new RuntimeException("exists");
+            throw new ValidationException("exists");
         }
         return availabilityRepository.save(availability);
     }
@@ -30,7 +33,7 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     @Override
     public EmployeeAvailability update(Long id, EmployeeAvailability availability) {
         EmployeeAvailability existing = availabilityRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("not found"));
         existing.setAvailable(availability.getAvailable());
         return availabilityRepository.save(existing);
     }
@@ -38,7 +41,7 @@ public class AvailabilityServiceImpl implements AvailabilityService {
     @Override
     public void delete(Long id) {
         EmployeeAvailability ea = availabilityRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("not found"));
         availabilityRepository.delete(ea);
     }
 

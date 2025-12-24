@@ -6,5 +6,4 @@ import java.util.List;
 public interface ShiftTemplateService {
     ShiftTemplate create(ShiftTemplate template);
     List<ShiftTemplate> getByDepartment(Long departmentId);
-    List<ShiftTemplate> getAll(); // Added this method for Controller
 }

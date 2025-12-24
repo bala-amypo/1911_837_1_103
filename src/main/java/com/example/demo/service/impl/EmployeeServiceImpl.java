@@ -3,11 +3,10 @@ package com.example.demo.service.impl;
 import com.example.demo.model.Employee;
 import com.example.demo.repository.EmployeeRepository;
 import com.example.demo.service.EmployeeService;
-import org.springframework.stereotype.Service;
 import java.util.List;
 
-@Service
 public class EmployeeServiceImpl implements EmployeeService {
+
     private final EmployeeRepository employeeRepository;
 
     public EmployeeServiceImpl(EmployeeRepository employeeRepository) {
@@ -16,50 +15,68 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee createEmployee(Employee employee) {
+        if (employee.getEmail() == null || employee.getEmail().isBlank()) {
+            throw new IllegalArgumentException("Email must be provided");
+        }
+
         if (employeeRepository.existsByEmail(employee.getEmail())) {
-            throw new RuntimeException("exists");
+            throw new RuntimeException("Employee email already exists");
         }
-        if (employee.getMaxWeeklyHours() <= 0) {
-            throw new RuntimeException("must be > 0");
+
+        if (employee.getMaxWeeklyHours() == null || employee.getMaxWeeklyHours() <= 0) {
+            throw new RuntimeException("Max weekly hours must be greater than 0");
         }
+
         if (employee.getRole() == null) {
-            employee.setRole("STAFF");
+            employee.setRole("STAFF"); // ensures default
         }
+
         return employeeRepository.save(employee);
     }
 
     @Override
     public Employee getEmployee(Long id) {
         return employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
     }
 
     @Override
     public Employee updateEmployee(Long id, Employee employee) {
         Employee existing = employeeRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("not found"));
-        
-        if (!existing.getEmail().equals(employee.getEmail()) && 
-            employeeRepository.existsByEmail(employee.getEmail())) {
-            throw new RuntimeException("exists");
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+
+        if (!existing.getEmail().equals(employee.getEmail()) &&
+                employeeRepository.existsByEmail(employee.getEmail())) {
+            throw new RuntimeException("Employee email already exists");
         }
+
+        if (employee.getMaxWeeklyHours() == null || employee.getMaxWeeklyHours() <= 0) {
+            throw new RuntimeException("Max weekly hours must be greater than 0");
+        }
+
         existing.setFullName(employee.getFullName());
+        existing.setEmail(employee.getEmail());
+        existing.setRole(employee.getRole());
+        existing.setMaxWeeklyHours(employee.getMaxWeeklyHours());
+
         return employeeRepository.save(existing);
     }
 
     @Override
     public void deleteEmployee(Long id) {
-        Employee e = getEmployee(id);
-        employeeRepository.delete(e);
-    }
-
-    @Override
-    public Employee findByEmail(String email) {
-        return employeeRepository.findByEmail(email).orElse(null);
+        Employee existing = employeeRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
+        employeeRepository.delete(existing);
     }
 
     @Override
     public List<Employee> getAll() {
         return employeeRepository.findAll();
+    }
+
+    @Override
+    public Employee findByEmail(String email) {
+        return employeeRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Employee not found"));
     }
 }

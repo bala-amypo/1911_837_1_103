@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service; // ✅ import
 
 import java.util.List;
 import java.util.Optional;
-
+@Service
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;

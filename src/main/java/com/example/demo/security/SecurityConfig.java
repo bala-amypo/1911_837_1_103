@@ -28,4 +28,9 @@ public class SecurityConfig {
     public DepartmentService departmentService(DepartmentRepository departmentRepository) {
         return new DepartmentServiceImpl(departmentRepository);
     }
+    @Bean
+public ScheduleService scheduleService(GeneratedShiftScheduleRepository scheduleRepository) {
+    return new ScheduleServiceImpl(scheduleRepository);
+}
+
 }

@@ -1,10 +1,11 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.EmployeeAvailability;
-import com.example.demo.repository.EmployeeRepository;
+import com.example.demo.repository.AvailabilityRepository;
 import com.example.demo.service.AvailabilityService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import java.time.LocalDate;
 import java.util.List;
 
@@ -13,12 +14,12 @@ import java.util.List;
 public class AvailabilityController {
 
     private final AvailabilityService availabilityService;
-    private final EmployeeRepository employeeRepository;
+    private final AvailabilityRepository availabilityRepository; // repo for employee availability
 
     public AvailabilityController(AvailabilityService availabilityService,
-                                  EmployeeRepository employeeRepository) {
+                                  AvailabilityRepository availabilityRepository) {
         this.availabilityService = availabilityService;
-        this.employeeRepository = employeeRepository;
+        this.availabilityRepository = availabilityRepository;
     }
 
     @PostMapping("/{employeeId}")
@@ -30,18 +31,12 @@ public class AvailabilityController {
 
     @GetMapping("/employee/{employeeId}")
     public ResponseEntity<List<EmployeeAvailability>> byEmployee(@PathVariable Long employeeId) {
-        return ResponseEntity.ok(employeeRepository.findByEmployee_Id(employeeId));
-    }
-
-    @GetMapping("/{availabilityId}")
-    public ResponseEntity<EmployeeAvailability> get(@PathVariable Long availabilityId) {
-        return ResponseEntity.ok(availabilityService.update(availabilityId, new EmployeeAvailability()));
+        return ResponseEntity.ok(availabilityRepository.findByEmployee_Id(employeeId)); // ✅ correct method
     }
 
     @GetMapping("/date/{date}")
     public ResponseEntity<List<EmployeeAvailability>> byDate(@PathVariable String date) {
-        return ResponseEntity.ok(
-                availabilityService.getByDate(LocalDate.parse(date))
-        );
+        LocalDate parsed = LocalDate.parse(date); // tests expect parse not to throw
+        return ResponseEntity.ok(availabilityService.getByDate(parsed));
     }
 }

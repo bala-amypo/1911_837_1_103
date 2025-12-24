@@ -19,7 +19,7 @@ public class User {
     private String role;
 
     public User() {
-        this.role = "ANALYST"; [cite_start]// Default role [cite: 156]
+        this.role = "ANALYST"; 
     }
 
     public User(String name, String email, String password, String role) {

@@ -19,9 +19,7 @@ public class UserServiceImpl implements UserService {
     public User register(User user) {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new ValidationException("exists"); 
-        }
-        // Direct save without password encoding (No Security)
-        return userRepository.save(user);
+        }        return userRepository.save(user);
     }
 
     @Override

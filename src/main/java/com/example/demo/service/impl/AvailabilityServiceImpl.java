@@ -22,7 +22,6 @@ public class AvailabilityServiceImpl implements AvailabilityService {
 
     @Override
     public EmployeeAvailability create(EmployeeAvailability availability) {
-        // [cite: 208]
         if (availabilityRepository.findByEmployee_IdAndAvailableDate(
                 availability.getEmployee().getId(), availability.getAvailableDate()).isPresent()) {
             throw new ValidationException("exists");

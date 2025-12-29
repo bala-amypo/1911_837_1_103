@@ -20,11 +20,9 @@ public class ShiftTemplateServiceImpl implements ShiftTemplateService {
 
     @Override
     public ShiftTemplate create(ShiftTemplate template) {
-        // [cite: 197]
         if (template.getEndTime().isBefore(template.getStartTime())) {
             throw new ValidationException("after");
         }
-        // [cite: 196]
         if (repository.findByTemplateNameAndDepartment_Id(template.getTemplateName(), template.getDepartment().getId()).isPresent()) {
             throw new ValidationException("unique");
         }

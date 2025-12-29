@@ -21,7 +21,6 @@ public class ScheduleController {
         return ResponseEntity.ok(service.generateForDate(LocalDate.parse(date))); // 
     }
     
-    // Test 62 calls this 
     @GetMapping("/date/{date}")
     public ResponseEntity<List<GeneratedShiftSchedule>> byDate(@PathVariable String date) {
         return ResponseEntity.ok(service.getByDate(LocalDate.parse(date)));

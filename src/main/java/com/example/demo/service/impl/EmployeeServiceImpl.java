@@ -18,11 +18,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee createEmployee(Employee employee) {
-        // [cite: 169]
         if (employeeRepository.existsByEmail(employee.getEmail())) {
             throw new ValidationException("exists");
         }
-        // [cite: 170]
         if (employee.getMaxWeeklyHours() <= 0) {
             throw new ValidationException("must be > 0");
         }
@@ -34,7 +32,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Employee getEmployee(Long id) {
-        // [cite: 287]
         return employeeRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("not found"));
     }
